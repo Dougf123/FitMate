@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00BCD4"
+    tools:context=".MainActivityQuestionaire">
+
+    <LinearLayout
+        android:layout_width="379dp"
+        android:layout_height="627dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/txtQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="101dp"
+            android:text="Hello World"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+        <RadioGroup
+            android:id="@+id/rdGrpQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RadioButton
+                android:id="@+id/rdBtnA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/white"
+                android:minHeight="48dp"
+                android:text="A"
+                android:textAlignment="textStart"
+                android:textColor="@color/white" />
+
+            <RadioButton
+                android:id="@+id/rdBtnB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/white"
+                android:minHeight="48dp"
+                android:text="B"
+                android:textAlignment="textStart"
+                android:textColor="@color/white" />
+
+            <RadioButton
+                android:id="@+id/rdBtnC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/white"
+                android:minHeight="48dp"
+                android:text="C"
+                android:textAlignment="textStart"
+                android:textColor="@color/white" />
+
+            <RadioButton
+                android:id="@+id/rdBtnD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/white"
+                android:minHeight="48dp"
+                android:text="D"
+                android:textAlignment="textStart"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFEB3B"
+                android:onClick="next"
+                android:text="Next" />
+        </RadioGroup>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

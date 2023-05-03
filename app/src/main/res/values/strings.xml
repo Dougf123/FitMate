@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ApplicationFitMate</string>
+    <string name="fitmate">FitMate</string>
+    <string name="please_enter_your_login_details_below_or_sign_up">Please enter your login details below or sign up:</string>
+</resources>
