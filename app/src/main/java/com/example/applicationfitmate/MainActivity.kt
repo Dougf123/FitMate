@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         }
         else{
             val db = DataBaseHelper(this)
+            val userID = db.retrieveUserID(loginName)
             val result = db.getUser(User(-1,"","","",loginName,password,-1,-1,-1))
             if(result == -1){
                 Toast.makeText(this,"Error, User not found, please try again",Toast.LENGTH_SHORT).show()
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
             else{
                 val intent = Intent(this,MainActivityMenu::class.java).apply {
                     putExtra("Difficulty",1)
+                    putExtra("UserID", userID)
                 }
                 startActivity(intent)
             }

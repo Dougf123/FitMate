@@ -17,7 +17,10 @@ class MainActivityMenu : AppCompatActivity() {
     }
 
     fun progress(view: View){
-        val intent = Intent(this,MainActivityProgress::class.java)
+        val userID = intent.getIntExtra("UserID", 0)
+        val intent = Intent(this,MainActivityProgress::class.java).apply {
+            putExtra("UserID", userID)
+        }
         startActivity(intent)
     }
 

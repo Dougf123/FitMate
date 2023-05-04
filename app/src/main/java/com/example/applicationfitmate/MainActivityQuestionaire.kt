@@ -247,6 +247,7 @@ class MainActivityQuestionaire : AppCompatActivity() {
                 //Questionaire finished
                 val db:DataBaseHelper = DataBaseHelper(this)
                 val responseList = ArrayList<UserQuestRespond>()
+                val userID = intent.getIntExtra("userID", 0)
                 responseList.add(qu1)
                 responseList.add(qu2)
                 responseList.add(qu3)
@@ -266,24 +267,28 @@ class MainActivityQuestionaire : AppCompatActivity() {
                 if(qu3.answerID == 9){
                     val intent = Intent(this, MainActivityMenu::class.java).apply {
                         putExtra("Difficulty", 1)
+                        putExtra("UserID",userID)
                     }
                     startActivity(intent)
                 }
                 else if(qu3.answerID == 10){
                     val intent = Intent(this, MainActivityMenu::class.java).apply {
                         putExtra("Difficulty", 2)
+                        putExtra("UserID",userID)
                     }
                     startActivity(intent)
                 }
                 else if(qu3.answerID == 11){
                     val intent = Intent(this, MainActivityMenu::class.java).apply {
                         putExtra("Difficulty", 3)
+                        putExtra("UserID",userID)
                     }
                     startActivity(intent)
                 }
                 else if(qu3.answerID == 12){
                     val intent = Intent(this, MainActivityMenu::class.java).apply {
                         putExtra("Difficulty", 4)
+                        putExtra("UserID",userID)
                     }
                     startActivity(intent)
                 }

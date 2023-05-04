@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteException
+import kotlin.math.log
 
 /*Used Database helper form mobile application development to help*/
 
@@ -215,6 +216,71 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseName,
         cursor.close()
         db.close()
         return id
+    }
+
+    fun retrieveUser(id: Int): User {
+        val emptyUser = User(-1,"","","","","",-1,-1,-1)
+        val db:SQLiteDatabase
+        try{
+            db = this.readableDatabase
+        }catch (e:SQLiteException){
+            return emptyUser
+        }
+
+        val sqlStatement = "SELECT * FROM $UseTableName WHERE $UseColumn_ID = ?"
+        val param = arrayOf(id.toString())
+
+        val cursor: Cursor = db.rawQuery(sqlStatement,param)
+
+        if(cursor.moveToFirst()){
+            val userID = cursor.getInt(0)
+            val fName = cursor.getString(1)
+            val lName = cursor.getString(2)
+            val email = cursor.getString(3)
+            val login = cursor.getString(4)
+            val pass = cursor.getString(5)
+            val age = cursor.getInt(6)
+            val height = cursor.getInt(7)
+            val weight = cursor.getInt(8)
+
+            val user = User(userID,fName,lName,email, login,pass,age,height,weight)
+            cursor.close()
+            db.close()
+            return user
+        }
+
+        cursor.close()
+        db.close()
+        return emptyUser
+
+    }
+
+    fun updateUser(user: User) : Boolean {
+
+        val db: SQLiteDatabase
+        try{
+            db = this.writableDatabase
+        }catch (e:SQLiteException){
+            return false
+        }
+
+
+        val cv : ContentValues = ContentValues()
+
+        cv.put(UseColumn_ID, user.id)
+        cv.put(UseColumn_FName, user.fName)
+        cv.put(UseColumn_LName,user.lName)
+        cv.put(UseColumn_Email,user.email)
+        cv.put(UseColumn_Login, user.loginName)
+        cv.put(UseColumn_Pass, user.password)
+        cv.put(UseColumn_Age, user.age)
+        cv.put(UseColumn_Height, user.height)
+        cv.put(UseColumn_Weight, user.weight)
+
+        val result = db.update(UseTableName,cv,"$UseColumn_ID = ${user.id}", null) == 1
+        db.close()
+        return result
+
     }
 
     fun createWorkout(workout: Workout): Int {
