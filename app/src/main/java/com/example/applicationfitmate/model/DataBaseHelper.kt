@@ -65,6 +65,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseName,
     private val AnsTableName = "Answer"
     private val AnsColumn_ID = "ID"
     private val AnsColumn_Text = "AnswerText"
+    private val AnsColumn_QuID = "QuestionID"
 
     /* UserQuestRespond Table */
     private val UQRTableName = "UserQuestRespond"
@@ -550,6 +551,39 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseName,
         cursor.close()
 
         return questionList
+    }
+
+    fun getAnswers(questionID: Int): ArrayList<Answer>{
+
+        val answerList = ArrayList<Answer>()
+
+        val db:SQLiteDatabase
+        try{
+            db = this.readableDatabase
+        }catch (e:SQLiteException){
+            return answerList
+        }
+
+        val sqlStatement = "SELECT * FROM $AnsTableName WHERE $AnsColumn_QuID = ?"
+        val param = arrayOf(questionID.toString())
+
+        val cursor: Cursor = db.rawQuery(sqlStatement, param)
+
+        if(cursor.moveToFirst()){
+            do{
+                val id = cursor.getInt(0)
+                val ansText = cursor.getString(1)
+                val quID = cursor.getInt(2)
+
+                val answer = Answer(id,ansText,quID)
+                answerList.add(answer)
+            }while (cursor.moveToNext())
+            cursor.close()
+            db.close()
+        }
+        cursor.close()
+        db.close()
+        return answerList
     }
 
     fun addResponse(response: UserQuestRespond): Int {

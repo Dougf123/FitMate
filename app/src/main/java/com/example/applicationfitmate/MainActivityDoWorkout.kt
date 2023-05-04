@@ -45,7 +45,7 @@ class MainActivityDoWorkout : AppCompatActivity() {
         val db:DataBaseHelper = DataBaseHelper(this)
 
         if(repsCheck.isEmpty()){
-            Toast.makeText(this,"Please enter the number of reps you manage",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Please enter the number of reps you managed",Toast.LENGTH_SHORT).show()
         }
         else{
 

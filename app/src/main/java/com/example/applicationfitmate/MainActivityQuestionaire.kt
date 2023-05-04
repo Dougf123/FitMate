@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import com.example.applicationfitmate.model.Answer
 import com.example.applicationfitmate.model.DataBaseHelper
 import com.example.applicationfitmate.model.Question
 import com.example.applicationfitmate.model.UserQuestRespond
@@ -13,6 +14,7 @@ class MainActivityQuestionaire : AppCompatActivity() {
 
     val db: DataBaseHelper = DataBaseHelper(this)
     var questionList = ArrayList<Question>()
+    var answerList = ArrayList<Answer>()
 
     var index = 0
 
@@ -46,7 +48,20 @@ class MainActivityQuestionaire : AppCompatActivity() {
         qu10.userID = userID
 
         questionList = db.getQuestions()
+        answerList = db.getAnswers(questionList[0].id)
+
         var questionText = findViewById<TextView>(R.id.txtQuestion)
+        val rdBtnA = findViewById<RadioButton>(R.id.rdBtnA)
+        val rdBtnB = findViewById<RadioButton>(R.id.rdBtnB)
+        val rdBtnC = findViewById<RadioButton>(R.id.rdBtnC)
+        val rdBtnD = findViewById<RadioButton>(R.id.rdBtnD)
+
+        rdBtnA.text = answerList[0].answerText
+        rdBtnB.text = answerList[1].answerText
+        rdBtnC.text = answerList[2].answerText
+        rdBtnD.text = answerList[3].answerText
+
+
 
         questionText.text = questionList[0].questionText
 
@@ -223,9 +238,13 @@ class MainActivityQuestionaire : AppCompatActivity() {
                 index++
                 questionText.text = questionList[index].questionText
                 rdGroup.clearCheck()
+                answerList = db.getAnswers(questionList[index].id)
+                rdBtnA.text = answerList[0].answerText
+                rdBtnB.text = answerList[1].answerText
+                rdBtnC.text = answerList[2].answerText
+                rdBtnD.text = answerList[3].answerText
             }else {
                 //Questionaire finished
-
                 val db:DataBaseHelper = DataBaseHelper(this)
                 val responseList = ArrayList<UserQuestRespond>()
                 responseList.add(qu1)
