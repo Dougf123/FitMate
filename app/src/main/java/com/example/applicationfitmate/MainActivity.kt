@@ -32,7 +32,9 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this,"Error, User not found, please try again",Toast.LENGTH_SHORT).show()
             }
             else{
-                val intent = Intent(this,MainActivityMenu::class.java)
+                val intent = Intent(this,MainActivityMenu::class.java).apply {
+                    putExtra("Difficulty",1)
+                }
                 startActivity(intent)
             }
         }

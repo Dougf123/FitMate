@@ -33,6 +33,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/txtMenuMessage"
+            android:layout_width="match_parent"
+            android:layout_height="87dp"
+            android:text="We have suggested you a workout based on your answers to the questionnaire. Try it out by pressing the button below!"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnMenuSuggested"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFEB3B"
+            android:onClick="start"
+            android:text="Start workout" />
+
     </LinearLayout>
 
     <LinearLayout

@@ -31,4 +31,19 @@ class MainActivityMenu : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun start(view: View){
+        val difficulty = intent.getIntExtra("Difficulty", 0)
+        var workoutID = 0
+        when(difficulty){
+            1 -> workoutID = 15
+            2 -> workoutID = 16
+            3 -> workoutID = 17
+            4 -> workoutID = 18
+        }
+        val intent = Intent(this,MainActivityDoWorkout::class.java).apply {
+            putExtra("WorkoutID", workoutID)
+        }
+        startActivity(intent)
+    }
+
 }

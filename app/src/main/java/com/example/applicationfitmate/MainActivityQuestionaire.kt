@@ -262,9 +262,34 @@ class MainActivityQuestionaire : AppCompatActivity() {
                 }
                 db.close()
                 btnNext.isEnabled = false
-                Toast.makeText(this,"Questionaire Finished",Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivityMenu::class.java)
-                startActivity(intent)
+                //suggest pre made workouts
+                if(qu3.answerID == 9){
+                    val intent = Intent(this, MainActivityMenu::class.java).apply {
+                        putExtra("Difficulty", 1)
+                    }
+                    startActivity(intent)
+                }
+                else if(qu3.answerID == 10){
+                    val intent = Intent(this, MainActivityMenu::class.java).apply {
+                        putExtra("Difficulty", 2)
+                    }
+                    startActivity(intent)
+                }
+                else if(qu3.answerID == 11){
+                    val intent = Intent(this, MainActivityMenu::class.java).apply {
+                        putExtra("Difficulty", 3)
+                    }
+                    startActivity(intent)
+                }
+                else if(qu3.answerID == 12){
+                    val intent = Intent(this, MainActivityMenu::class.java).apply {
+                        putExtra("Difficulty", 4)
+                    }
+                    startActivity(intent)
+                }
+                else{
+                    Toast.makeText(this,"ERROR question 3 answer ID wrong", Toast.LENGTH_SHORT).show()
+                }
 
             }
         }
