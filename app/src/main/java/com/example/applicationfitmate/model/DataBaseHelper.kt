@@ -387,17 +387,84 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseName,
 
     }
 
-    fun addExerciseToWorkout(id: Int): Int {
-        TODO("Need to get exercise details somehow")
-        //WorkoutID can be obtained from getWorkoutID()
+    fun addExerciseToWorkout(exerciseID: Int, workoutID: Int): Int {
+
+        val exercise = getExercise(exerciseID)
+
+        val db:SQLiteDatabase
+        try{
+            db = this.writableDatabase
+        }catch (e:SQLiteException){
+            return -2
+        }
+
+
+        val cv:ContentValues = ContentValues()
+        cv.put(ExWorColumn_Name, exercise.name)
+        cv.put(ExWorColumn_Instr, exercise.instruction)
+        cv.put(ExWorColumn_MuscID, exercise.muscleGroupID)
+        cv.put(ExWorColumn_WorID, workoutID)
+
+        val result = db.insert("$ExWorTableName", null, cv)
+        db.close()
+        return if (result.toInt() == -1) result.toInt()
+        else 1
+
     }
 
     fun getWorkoutID(name: String): Int {
-        TODO("get the workout ID from name after creating workout")
+
+        val db:SQLiteDatabase
+        try{
+            db = this.readableDatabase
+        }catch (e:SQLiteException){
+            return -2
+        }
+
+        val sqlStatement = "SELECT * FROM $WorTableName WHERE $WorColumn_Name = ?"
+        val param = arrayOf(name)
+        val cursor: Cursor = db.rawQuery(sqlStatement, param)
+        if(cursor.moveToFirst()){
+            val id = cursor.getInt(0)
+            cursor.close()
+            db.close()
+            return id
+        }
+        cursor.close()
+        db.close()
+        return -1
+
     }
 
     fun getExercise(id: Int): Exercise {
-        TODO("Return exercise that matches the ID")
+
+        val emptyExercise = Exercise(-1,"","",-1)
+        val sqlExercise = Exercise(-1,"SQL","",-1)
+        val db: SQLiteDatabase
+        try{
+            db = this.readableDatabase
+        }catch (e: SQLiteException){
+            return sqlExercise
+        }
+
+        val sqlStatement = "SELECT * FROM $ExTableName WHERE $ExColumn_ID = ?"
+        val param = arrayOf(id.toString())
+        val cursor: Cursor = db.rawQuery(sqlStatement, param)
+        if(cursor.moveToFirst()){
+            val name = cursor.getString(1)
+            val instruction = cursor.getString(2)
+            val muscID = cursor.getInt(3)
+            val exercise = Exercise(id,name,instruction,muscID)
+            cursor.close()
+            db.close()
+            return exercise
+        }
+        else{
+            cursor.close()
+            db.close()
+            return emptyExercise
+        }
+
     }
 
     fun retrieveAnswerID(text: String): Int {

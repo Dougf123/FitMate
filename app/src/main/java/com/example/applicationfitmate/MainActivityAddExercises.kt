@@ -48,7 +48,7 @@ class MainActivityAddExercises : AppCompatActivity() {
             val name = db.getExerciseName(id)
 
 
-            sureExercise()
+            sureExercise(id)
 
         }
 
@@ -59,13 +59,21 @@ class MainActivityAddExercises : AppCompatActivity() {
     /* Code for below function retrieved from:
     *  https://www.youtube.com/watch?v=B9Iy3UXXpBg
      */
-    private fun sureExercise() {
+    private fun sureExercise(exerciseID: Int) {
         var builder = AlertDialog.Builder(this)
         builder.setTitle("Add Exercise")
         builder.setMessage("Do you want to add this exercise to the workout?")
         builder.setPositiveButton("Yes", DialogInterface.OnClickListener {dialog, id ->
             //yes button selected
-            Toast.makeText(this,"YES",Toast.LENGTH_SHORT).show()
+            //make exercise workout
+            val db:DataBaseHelper = DataBaseHelper(this)
+            val workoutID = intent.getIntExtra("WorkoutID", 0)
+            val result = db.addExerciseToWorkout(exerciseID, workoutID)
+            when(result){
+                1 -> Toast.makeText(this,"Success",Toast.LENGTH_SHORT).show()
+                -1 -> Toast.makeText(this,"Error adding to database",Toast.LENGTH_SHORT).show()
+                -2 -> Toast.makeText(this,"Error connecting to database",Toast.LENGTH_SHORT).show()
+            }
             dialog.cancel()
         })
         builder.setNegativeButton("No", DialogInterface.OnClickListener{ dialog, id ->

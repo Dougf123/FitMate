@@ -59,7 +59,16 @@
         <RadioGroup
             android:id="@+id/rdGrpMuscleGroup"
             android:layout_width="match_parent"
-            android:layout_height="99dp">
+            android:layout_height="189dp">
+
+            <RadioButton
+                android:id="@+id/rdBtnLegs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/white"
+                android:minHeight="48dp"
+                android:text="Legs"
+                android:textColor="@color/white" />
 
             <RadioButton
                 android:id="@+id/rdBtnArms"
@@ -78,6 +87,16 @@
                 android:minHeight="48dp"
                 android:text="Chest"
                 android:textColor="@color/white" />
+
+            <RadioButton
+                android:id="@+id/rdBtnBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/white"
+                android:minHeight="48dp"
+                android:text="Back"
+                android:textColor="@color/white"
+                tools:ignore="TouchTargetSizeCheck" />
 
         </RadioGroup>
 
