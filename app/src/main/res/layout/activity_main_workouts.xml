@@ -22,8 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#FFEB3B"
-            android:onClick="workouts"
-            android:text="Workouts" />
+            android:onClick="menu"
+            android:text="Menu" />
 
         <Button
             android:id="@+id/btnMenuProgress"

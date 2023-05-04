@@ -12,10 +12,28 @@ class MainActivitySettings : AppCompatActivity() {
     }
 
     fun logOut(view: View){
-
         val intent = Intent(this,MainActivity::class.java)
         startActivity(intent)
+    }
 
+    fun workouts(view: View){
+        val intent = Intent(this,MainActivityWorkouts::class.java)
+        startActivity(intent)
+    }
+
+    fun progress(view: View){
+        val intent = Intent(this,MainActivityProgress::class.java)
+        startActivity(intent)
+    }
+
+    fun nutrition(view: View){
+        val intent = Intent(this,MainActivityNutrition::class.java)
+        startActivity(intent)
+    }
+
+    fun menu(view:View){
+        val intent = Intent(this,MainActivityMenu::class.java)
+        startActivity(intent)
     }
 
 }

@@ -21,8 +21,8 @@ class MainActivityWorkouts : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun workouts(view: View){
-        val intent = Intent(this,MainActivityWorkouts::class.java)
+    fun menu(view: View){
+        val intent = Intent(this,MainActivityMenu::class.java)
         startActivity(intent)
     }
 
