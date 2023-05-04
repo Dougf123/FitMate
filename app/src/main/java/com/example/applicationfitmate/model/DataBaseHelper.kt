@@ -73,6 +73,13 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseName,
     private val UQRCOlumn_AnsID = "AnswerID"
     private val UQRColumn_UserID = "UserID"
 
+    /* WorkoutRecord Table */
+    private val WRTableName = "WorkoutRecord"
+    private val WRColumn_ID = "ID"
+    private val WRColumn_WorID = "WorkoutID"
+    private val WRColumn_ExWorID = "ExerciseWorkoutID"
+    private val WRColumn_Reps = "Reps"
+
 
     /**
      * return  1 : the new user has been add to the database successfully
@@ -313,21 +320,47 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseName,
 
     }
 
-    fun getExerciseDetails(param: String): ArrayList<String>{
+    fun getAllExerciseWorkouts(workoutID: Int): ArrayList<ExerciseWorkout>{
 
+        val exerciseList = ArrayList<ExerciseWorkout>()
+        val db:SQLiteDatabase = this.readableDatabase
+
+        val sqlStatement = "SELECT * FROM $ExWorTableName WHERE $ExWorColumn_WorID = ?"
+        val param = arrayOf(workoutID.toString())
+
+        val cursor: Cursor = db.rawQuery(sqlStatement, param)
+
+        if(cursor.moveToFirst()){
+            do{
+                val id = cursor.getInt(0)
+                val name = cursor.getString(1)
+                val instr = cursor.getString(2)
+                val muscID = cursor.getInt(3)
+                val worID = cursor.getInt(4)
+
+                val exercise = ExerciseWorkout(id,name,instr,muscID,worID)
+
+                exerciseList.add(exercise)
+            }while (cursor.moveToNext())
+
+            cursor.close()
+            db.close()
+        }
+        return exerciseList
+
+    }
+
+    fun getExerciseDetails(param: String): ArrayList<String>{
         val nameList = ArrayList<String>()
         val instrList = ArrayList<String>()
         val muscGroupList = ArrayList<String>()
         val emptyList = ArrayList<String>()
-
         val db:SQLiteDatabase
-
         try{
             db = this.readableDatabase
         }catch (e: SQLiteException){
             return emptyList
         }
-
         val sqlStatement = "SELECT * FROM $ExTableName"
         val cursor: Cursor = db.rawQuery(sqlStatement, null)
         if(cursor.moveToFirst()){
@@ -344,7 +377,6 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseName,
         }
         cursor.close()
         db.close()
-
         if(param == "name"){
             return nameList
         }
@@ -542,6 +574,96 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseName,
 
     }
 
+    fun getAllWorkouts(): ArrayList<Workout>{
 
+        val workoutList = ArrayList<Workout>()
+        val db:SQLiteDatabase = this.readableDatabase
+
+        val sqlStatement = "SELECT * FROM $WorTableName"
+
+        val cursor: Cursor = db.rawQuery(sqlStatement, null)
+
+        if(cursor.moveToFirst()){
+            do{
+                val id = cursor.getInt(0)
+                val name = cursor.getString(1)
+                val desc = cursor.getString(2)
+                val muscID = cursor.getInt(3)
+                val diff = cursor.getString(4)
+
+                val workout = Workout(id,name,desc,muscID,diff)
+
+                workoutList.add(workout)
+            }while (cursor.moveToNext())
+            cursor.close()
+            db.close()
+        }
+        return workoutList
+
+    }
+
+    fun getWorkoutDetails(param: String): ArrayList<String> {
+
+        val nameList = ArrayList<String>()
+        val descList = ArrayList<String>()
+        val emptyList = ArrayList<String>()
+
+        val db:SQLiteDatabase
+
+        try {
+            db = this.readableDatabase
+        }catch (e:SQLiteException){
+            return emptyList
+        }
+
+        val sqlStatement = "SELECT * FROM $WorTableName"
+        val cursor: Cursor = db.rawQuery(sqlStatement, null)
+
+        if(cursor.moveToFirst()){
+            do{
+                val name = cursor.getString(1)
+                val desc = cursor.getString(2)
+
+                nameList.add(name)
+                descList.add(desc)
+            }while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+
+        if(param == "name"){
+            return nameList
+        }
+        else if(param == "desc"){
+            return descList
+        }
+        else{
+            return emptyList
+        }
+
+    }
+
+    fun addRecord(record: WorkoutRecord): Int {
+
+        val db:SQLiteDatabase
+        try{
+            db = this.writableDatabase
+        }catch (e:SQLiteException){
+            return -2
+        }
+
+        val cv:ContentValues = ContentValues()
+
+        cv.put(WRColumn_WorID, record.workoutID)
+        cv.put(WRColumn_ExWorID, record.exerciseWorkoutID)
+        cv.put(WRColumn_Reps, record.reps)
+
+        val result = db.insert("$WRTableName",null,cv)
+        db.close()
+
+        return if (result.toInt() == -1) result.toInt()
+        else 1
+
+    }
 
 }

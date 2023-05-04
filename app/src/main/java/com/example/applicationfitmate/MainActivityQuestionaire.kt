@@ -17,7 +17,6 @@ class MainActivityQuestionaire : AppCompatActivity() {
     var index = 0
 
 
-    /* Variables used so a user can go back and change their answer */
     var qu1 = UserQuestRespond(-1,-1,-1,-1)
     var qu2 = UserQuestRespond(-1,-1,-1,-1)
     var qu3 = UserQuestRespond(-1,-1,-1,-1)

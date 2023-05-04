@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00BCD4"
-    tools:context=".MainActivitySettings">
+    tools:context=".MainActivityStartWorkout" >
 
     <LinearLayout
         android:layout_width="379dp"
@@ -16,23 +16,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/txtSettingsTitle"
+        <ListView
+            android:id="@+id/myListVu"
             android:layout_width="match_parent"
-            android:layout_height="92dp"
-            android:text="Settings"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="50sp" />
-
-        <Button
-            android:id="@+id/btnSettingsLogOut"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFEB3B"
-            android:backgroundTint="#FFEB3B"
-            android:onClick="logOut"
-            android:text="Log Out"
-            android:textColor="@color/black" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

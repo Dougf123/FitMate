@@ -9,19 +9,74 @@
 
     <LinearLayout
         android:layout_width="409dp"
-        android:layout_height="657dp"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/btnMenuWorkouts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#FFEB3B"
+            android:onClick="workouts"
+            android:text="Workouts" />
+
+        <Button
+            android:id="@+id/btnMenuProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#FFEB3B"
+            android:onClick="progress"
+            android:text="Progress" />
+
+        <Button
+            android:id="@+id/btnMenuNutrition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#FFEB3B"
+            android:onClick="nutrition"
+            android:text="Nutrition" />
+
+        <Button
+            android:id="@+id/btnMenuSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#FFEB3B"
+            android:onClick="settings"
+            android:text="Settings" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="413dp"
+        android:layout_height="589dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnCreate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFEB3B"
             android:onClick="create"
             android:text="Create" />
+
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFEB3B"
+            android:onClick="start"
+            android:text="Start" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
