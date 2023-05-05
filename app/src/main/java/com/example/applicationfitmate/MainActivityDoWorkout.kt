@@ -37,18 +37,15 @@ class MainActivityDoWorkout : AppCompatActivity() {
     }
 
     fun next(view: View){
-
         var name = findViewById<TextView>(R.id.txtExWorName)
         var instr = findViewById<TextView>(R.id.txtExWorInstr)
         var repsCheck = findViewById<EditText>(R.id.editTextReps).text.toString()
         val workoutID = intent.getIntExtra("WorkoutID", 0)
         val db:DataBaseHelper = DataBaseHelper(this)
-
         if(repsCheck.isEmpty()){
             Toast.makeText(this,"Please enter the number of reps you managed",Toast.LENGTH_SHORT).show()
         }
         else{
-
             var reps = findViewById<EditText>(R.id.editTextReps).text.toString().toInt()
             var record = WorkoutRecord(-1,workoutID,exerciseList[index].id,reps)
             val result = db.addRecord(record)

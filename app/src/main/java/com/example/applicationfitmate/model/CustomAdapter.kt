@@ -31,17 +31,13 @@ class CustomAdapter(private val appContext: Context, private val nameList: Array
 
         var view: View? = view
         view = inflater.inflate(R.layout.activity_list_view, parent, false)
-
         val name = view.findViewById<TextView>(R.id.txtExName)
         val instruction = view.findViewById<TextView>(R.id.txtExInstruction)
         val muscleGroup = view.findViewById<TextView>(R.id.txtExMuscleGroup)
-
         name.text = nameList[position]
         instruction.text = instructionList[position]
         muscleGroup.text = muscGroupList[position]
-
         return view
-
     }
 
 }

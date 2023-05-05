@@ -35,10 +35,7 @@ class MainActivityAddExercises : AppCompatActivity() {
         var workoutID = intent.getIntExtra("WorkoutID", 0)
 
 
-        /*
-        Below code for listView.OnItemClickListener retrieved from
-        "https://www.tutorialspoint.com/how-to-handle-the-click-event-in-listview-in-android-using-kotlin#"
-         */
+
 
         listView.setOnItemClickListener {parent, _, position, _ ->
             val selectedItem = parent.getItemAtPosition(position)
